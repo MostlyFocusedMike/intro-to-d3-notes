@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>selecttions</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+<svg id='container'>
+    <rect />
+    <rect />
+    <rect />
+    <rect />
+    <rect />
+</svg>
+<script>
+const barData = [45, 67, 96, 84];
+const svg = d3.select('#container');
+
+// select the first Node in the svg selection
+// (note: selections can be chained)
+const firstRect = svg.select('rect');
+
+// select all the Nodes in the svg selection
+const allRects = svg.selectAll('rect');
+/* This returns the following data
+    _groups: [NodeList(5)], // Always seems to be an array of 1, the actual NodeList nested
+    _parents: [svg#container] // same nested setup
+    [[Prototype]]: { ...D3 methods }
+*/
+
+// `datum` methods binds the ENTIRE data array to the selection
+// So here one rectangle gets all the __data__ attribute
+// firstRect.datum(barData)
+// console.log('firstRect._groups[0].__data__: ', firstRect._groups[0][0].__data__);
+// // [45, 67, 96, 84, 41]
+
+// // Here, each one of the rects gets the entire data bound
+// allRects.selectAll('rect').datum(barData)
+
+// `data` method binds a single index to a single selection. No array nesting, unless the value was a nested array
+// If there is more data than selections, the extra data seems to be ignored
+// If more selections than data, the data is set to be undefined
+allRects.data(barData)
+console.log('firstRect._groups[0].__data__: ', allRects._groups[0][0].__data__);
+// 45
+console.log('firstRect._groups[0].__data__: ', allRects._groups[0][1].__data__);
+// 67
+console.log('firstRect._groups[0].__data__: ', allRects._groups[0][2].__data__);
+// 96
+console.log('firstRect._groups[0].__data__: ', allRects._groups[0][3].__data__);
+// 84
+console.log('firstRect._groups[0].__data__: ', allRects._groups[0][4].__data__);
+// undefined
+
+</script>
+</body>
+</html>
