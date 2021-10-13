@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>selecttions</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+<svg id='container' width=250 height=100 style='border: 1px solid'>
+    <rect />
+    <rect />
+    <rect />
+    <rect />
+    <rect />
+</svg>
+<script>
+
+const barData = [45, 67, 96, 84, 43];
+const svg = d3.select('#container');
+const allRects = svg.selectAll('rect');
+
+/*
+attr will set attributes of the selections passed in.
+if you give it a function (data, index) => {}, it will iterate through the items
+and set the given attribute to the return value.
+If you set a simple value, it will set the given attr of each selection to that value
+
+The data in the function refers to the array that we used in data, and the attr refers to
+the element at the same index
+*/
+allRects
+    .data(barData)
+    // calculate x-position based on its index
+    .attr('x', (data, i) => i * 50)
+    .attr('y', (data, i) => 100 - data)
+    // set height based on the bound datum
+    .attr('height', d => d)
+    // rest of attributes are constant values
+    .attr('width', 50)
+    .attr('stroke-width', 3)
+    .attr('stroke-dasharray', '5 5')
+    .attr('stroke', 'plum')
+    .attr('fill', 'pink')
+</script>
+</body>
+</html>
