@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creations</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <!-- just making it super wide instead of bothering to create a proper element with width -->
+<svg id='container' width=500 height=100 style='border: 1px solid'>
+    <!-- Nothing in here this time -->
+</svg>
+<script>
+
+const barData = [45, 67, 96, 84, 43, 79];
+const svg = d3.select('#container');
+const allRects = svg.selectAll('rect');
+
+// this is how we create elements
+svg.selectAll('.bar')
+    .data(barData).enter().append('rect')
+// .enter() gets the enter selection (data missing elements).
+// it seems to take the data() entries, then create placeholder elements
+// Then these placeholder elements become real when we append() something to them
+// in this case a `rect` element
+// We then carry on with our created elements like usual
+    .attr('x', (data, i) => i * 50)
+    .attr('y', (data, i) => 100 - data)
+    .attr('height', data => data)
+    .attr('width', 50)
+    .attr('stroke-width', 3)
+    .attr('stroke-dasharray', '5 5')
+    .attr('stroke', 'plum')
+    .attr('fill', 'pink')
+// Now you can add as many elements as you want
+</script>
+</body>
+</html>
