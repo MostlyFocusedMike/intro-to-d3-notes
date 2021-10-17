@@ -35,6 +35,24 @@ svg.selectAll('.bar')
     .attr('stroke', 'plum')
     .attr('fill', 'pink')
 // Now you can add as many elements as you want
+
+/*
+D3.js stands for data-driven documents because
+we're letting our data drive what is created in the DOM.
+
+
+🚨 Things to look out for when entering and appending:
+
+The data passed in must be an array
+The selector in selectAll(selector) must match what is appended.
+For example, if the selector is a class name instead of element tag:
+selection.selectAll('.bar')
+  .data(data).enter().append('rect')
+  .classed('bar', true)
+
+  FOR THE RECORD I don't think I understand that warning? When you don't use the class, it doesn't break or anything
+  This may just be a good thing to do so classes always match?
+*/
 </script>
 </body>
 </html>
